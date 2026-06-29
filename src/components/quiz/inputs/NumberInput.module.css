@@ -1,0 +1,41 @@
+.wrapper { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+.display {
+  display: flex; align-items: baseline; gap: 8px;
+  min-height: 72px; justify-content: center;
+}
+.value {
+  font-family: var(--font-display); font-size: 4.5rem; font-weight: 900;
+  color: var(--text-primary); line-height: 1; min-width: 100px;
+  text-align: center; letter-spacing: -0.04em;
+}
+.unit { font-size: 1.1rem; color: var(--text-secondary); font-weight: 500; }
+
+.numpad {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 7px; width: 100%; max-width: 264px;
+}
+.numpadKey {
+  height: 54px; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  color: var(--text-primary); font-size: 1.2rem;
+  font-family: var(--font-display); font-weight: 600; cursor: pointer;
+  transition: all 0.12s ease; display: flex; align-items: center; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.numpadKey:hover { background: rgba(74,143,232,0.06); border-color: var(--border-mid); }
+.numpadKey:active {
+  transform: scale(0.93);
+  background: rgba(74,143,232,0.12);
+  border-color: var(--border-active);
+}
+.numpadEmpty { height: 54px; }
+
+.skipBtn {
+  background: transparent; border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full); color: var(--text-muted);
+  font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500;
+  padding: 9px 22px; cursor: pointer; transition: all 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.skipBtn:hover { color: var(--text-secondary); border-color: var(--border-mid); }

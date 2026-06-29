@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jackie-jeans.vercel.app/sitemap.xml

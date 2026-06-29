@@ -1,0 +1,347 @@
+/* ═══════════════════════════════════════════════════════════════
+   MAIN SHELL
+═══════════════════════════════════════════════════════════════ */
+.main {
+  min-height: 100dvh;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO — full-screen cinematic video
+═══════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  /* overflow:clip keeps video cropped but does NOT create a scroll container — smooth scrolling works */
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  z-index: 0;
+}
+
+/* Overlay: LIGHTER — let image breathe */
+.overlayBottom {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 35%, transparent 60%),
+    linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.05) 45%, transparent 70%);
+  z-index: 1;
+}
+
+.overlayTop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 100%);
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV — Report #1: lighter, less blur, slightly smaller
+═══════════════════════════════════════════════════════════════ */
+.nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 14px 24px;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+}
+
+.navInner {
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  /* Report #1: rgba(20,20,20,.65) lighter bg, 10px blur */
+  background: rgba(20,20,20,0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 5px 5px 5px 14px;
+}
+
+.navBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 20px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  margin-right: 4px;
+}
+
+.navLogo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter: brightness(1.4) saturate(1.1);
+  flex-shrink: 0;
+}
+
+.navBrandName {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Nav links — same spacing/style as original */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.navLink {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  padding: 7px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: color 0.18s ease, background 0.18s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.navLink:hover { color: #fff; background: rgba(255,255,255,0.06); }
+
+/* Nav CTA — Report #1: smaller, softer */
+.navCta {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  background: #4B6BD8;
+  border-radius: 10px;
+  padding: 7px 16px;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: background 0.18s ease, transform 0.15s ease;
+  white-space: nowrap;
+  margin-left: 5px;
+  flex-shrink: 0;
+}
+.navCta:hover {
+  background: #6284E0;
+  transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE ARROWS — Report #7: outline style, reduced opacity
+═══════════════════════════════════════════════════════════════ */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  /* Report #7: transparent bg, outline border */
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.arrow:hover { border-color: rgba(255,255,255,0.5); color: rgba(255,255,255,0.85); }
+.arrowLeft  { left: 20px; }
+.arrowRight { right: 20px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO CONTENT — bottom-left like Jackie Jeans original
+═══════════════════════════════════════════════════════════════ */
+.heroContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  /* Left/right gap matching original — text not at very edge */
+  padding: 0 80px 56px 80px;
+  max-width: 100%;
+  animation: slideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Eyebrow label — small pill like original orange-dot label */
+.heroLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  /* Report #9: softer color */
+  color: rgba(255,255,255,0.65);
+  /* Report #3: badge→headline gap 16px→28px */
+  margin-bottom: 28px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  padding: 5px 12px;
+  backdrop-filter: blur(6px);
+}
+
+.heroLabelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  /* Orange dot — like original */
+  background: #F97316;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: pulseDot 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(0.78); }
+}
+
+/* Report #2: font-weight 700, 80-88px, line-height 1.0-1.05 */
+.heroHeadline {
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  color: #fff;
+  /* Report #3: headline→description gap 20px→32px */
+  margin-bottom: 32px;
+}
+
+/* Report #2: "Zero guesswork." → #F4E8C6 (warm cream, not gold) */
+.heroHeadlineGold {
+  color: #F4E8C6;
+}
+
+/* Report #4: description lighter, smaller, normal tracking */
+.heroSub {
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 1.1vw, 0.88rem);
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+  /* Report #3: description→buttons gap 26px→40px */
+  margin-bottom: 40px;
+  max-width: 360px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* ── CTAs ── */
+.heroCtas {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Report #5: CTA smaller, softer blue, 24px radius, minimal shadow */
+.ctaMain {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(90, 125, 183, 0.9);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 99px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(90, 125, 183, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+.ctaMain:hover {
+  background: #5A7DB7;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(90, 125, 183, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+.ctaMain:active { transform: scale(0.96) translateY(0); }
+
+/* Ghost: lighter, smaller */
+.ctaGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+.ctaGhost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.ctaGhost:active { transform: scale(0.96) translateY(0); }
+
+/* ── Slide indicators bottom-left ── */
+.slideBottom {
+  margin-top: 28px;
+}
+
+.slideDots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Report #8: thinner 2px, narrower active */
+.slideDot {
+  display: block;
+  height: 2px;
+  width: 20px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.25);
+  transition: all 0.3s ease;
+}
+
+.slideDotActive {
+  /* Report #8: #FF7A30 less bright orange */
+  background: #FF7A30;
+  width: 24px;
+}

@@ -1,0 +1,26 @@
+.wrapper { display: flex; flex-direction: column; gap: 12px; }
+.brandRow {
+  padding: 12px 14px; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.brandName {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.sizeGrid { display: flex; flex-wrap: wrap; gap: 6px; }
+.sizeBtn {
+  min-width: 40px; height: 32px; padding: 0 10px;
+  background: var(--bg-chip); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full); font-family: var(--font-sans);
+  font-size: 0.78rem; font-weight: 500; color: var(--text-secondary);
+  cursor: pointer; transition: all 0.13s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.sizeBtn:hover { border-color: var(--border-mid); color: var(--text-primary); }
+.sizeBtn:active { transform: scale(0.92); }
+.sizeBtn.selected {
+  border-color: var(--accent); color: #fff; font-weight: 600;
+  background: var(--accent-dim);
+  box-shadow: 0 0 0 1px var(--accent);
+}

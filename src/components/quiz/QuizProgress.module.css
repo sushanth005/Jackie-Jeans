@@ -1,0 +1,33 @@
+.wrapper {
+  flex: 1;
+  padding: 0 4px;
+}
+
+.track {
+  height: 2px;
+  background: rgba(74,143,232,0.12);
+  border-radius: 99px;
+  overflow: visible;
+  position: relative;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(74,143,232,0.7) 0%, var(--accent) 100%);
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.fill::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(74,143,232,0.7);
+  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
